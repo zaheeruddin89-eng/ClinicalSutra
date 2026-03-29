@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClinicalSutra — Dermatology Atlas for MBBS and GPs</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
+:root{--navy:#0b2444;--navy-dark:#071a33;--gold:#c9a84c;--white:#ffffff;--text-muted:#8ba3c1;--card-bg:rgba(255,255,255,0.05);--card-border:rgba(201,168,76,0.2);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:var(--navy);color:var(--white);line-height:1.6;}
+nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(7,26,51,0.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(201,168,76,0.15);padding:16px 24px;display:flex;justify-content:space-between;align-items:center;}
+.logo{font-family:'Playfair Display',serif;font-size:1.3rem;}.logo span{color:var(--gold);}
+.nav-btn{background:var(--gold);color:#071a33;padding:10px 20px;border-radius:50px;font-weight:600;font-size:0.85rem;text-decoration:none;}
+.hero{min-height:100vh;background:linear-gradient(160deg,#0d2a4a 0%,#071833 60%,#0a2040 100%);display:flex;align-items:center;justify-content:center;text-align:center;padding:100px 24px 60px;}
+.badge{display:inline-block;border:1px solid rgba(201,168,76,0.4);border-radius:50px;padding:6px 18px;font-size:0.7rem;letter-spacing:0.15em;color:var(--gold);margin-bottom:28px;}
+h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,6vw,3.8rem);line-height:1.15;margin-bottom:20px;}
+h1 em{color:var(--gold);font-style:italic;}
+.hero-sub{font-size:1rem;color:var(--text-muted);max-width:520px;margin:0 auto 36px;}
+.stats{display:flex;justify-content:center;gap:32px;margin-bottom:40px;flex-wrap:wrap;}
+.stat-num{font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold);font-weight:700;}
+.stat-label{font-size:0.7rem;letter-spacing:0.1em;color:var(--text-muted);}
+.stat-divider{width:1px;background:rgba(201,168,76,0.3);align-self:stretch;}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.btn-primary{background:var(--gold);color:#071a33;padding:16px 32px;border-radius:50px;font-weight:700;font-size:1rem;text-decoration:none;display:inline-block;}
+.btn-secondary{border:1px solid rgba(255,255,255,0.3);color:var(--white);padding:16px 28px;border-radius:50px;font-size:0.95rem;text-decoration:none;display:inline-block;}
+.trust-bar{background:rgba(255,255,255,0.04);border-top:1px solid rgba(201,168,76,0.1);border-bottom:1px solid rgba(201,168,76,0.1);padding:14px 24px;display:flex;justify-content:center;gap:24px;flex-wrap:wrap;}
+.trust-item{font-size:0.72rem;letter-spacing:0.1em;color:var(--text-muted);}
+.trust-item::before{content:'◆ ';color:var(--gold);font-size:0.5rem;}
+section{padding:80px 24px;}
+.container{max-width:900px;margin:0 auto;}
+.section-label{font-size:0.7rem;letter-spacing:0.15em;color:var(--gold);margin-bottom:12px;}
+h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.2;margin-bottom:16px;}
+.section-sub{color:var(--text-muted);margin-bottom:40px;}
+.card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;padding:24px;margin-bottom:16px;}
+.card h3{font-size:1.1rem;margin-bottom:8px;}
+.card p{color:var(--text-muted);font-size:0.9rem;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:600px){.grid2{grid-template-columns:1fr;}}
+.sol-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;padding:24px;position:relative;}
+.card-num{position:absolute;top:12px;right:16px;font-family:'Playfair Display',serif;font-size:2rem;color:rgba(201,168,76,0.12);font-weight:700;}
+.sol-card h3{font-size:1rem;margin:10px 0 6px;}
+.sol-card p{color:var(--text-muted);font-size:0.85rem;}
+.module-item{background:var(--card-bg);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:18px 20px;display:flex;align-items:flex-start;gap:16px;margin-bottom:12px;}
+.check{width:28px;height:28px;min-width:28px;border:2px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:0.8rem;}
+.module-item h3{font-size:0.95rem;margin-bottom:4px;}
+.module-item p{color:var(--text-muted);font-size:0.82rem;}
+.testimonial{background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;padding:28px;margin-bottom:16px;}
+.testimonial p{font-style:italic;color:rgba(255,255,255,0.85);font-size:0.95rem;margin-bottom:16px;}
+.stars{color:var(--gold);margin-bottom:6px;}
+.author{font-weight:600;font-size:0.9rem;}
+.author-role{color:var(--text-muted);font-size:0.8rem;}
+.pricing-card{max-width:520px;margin:40px auto 0;background:linear-gradient(145deg,#112d52,#0d2444);border:1px solid rgba(201,168,76,0.4);border-radius:20px;padding:40px;text-align:center;position:relative;}
+.popular-badge{position:absolute;top:-1px;right:24px;background:var(--gold);color:#071a33;font-size:0.65rem;font-weight:700;padding:4px 14px;border-radius:0 0 10px 10px;}
+.price-amount{font-family:'Playfair Display',serif;font-size:4rem;color:var(--gold);font-weight:700;line-height:1;}
+.price-original{color:var(--text-muted);text-decoration:line-through;font-size:0.9rem;margin-bottom:24px;}
+.feature-list{list-style:none;text-align:left;margin-bottom:32px;}
+.feature-list li{padding:8px 0;font-size:0.9rem;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;}
+.feature-list li::before{content:'✓';color:var(--gold);font-weight:700;}
+.btn-buy{display:block;width:100%;background:var(--gold);color:#071a33;padding:18px;border-radius:50px;font-weight:700;font-size:1.05rem;text-decoration:none;text-align:center;margin-bottom:14px;}
+.payment-note{font-size:0.75rem;color:var(--text-muted);}
+.faq-item{background:var(--card-bg);border:1px solid var(--card-border);border-radius:10px;overflow:hidden;margin-bottom:12px;}
+.faq-q{width:100%;background:none;border:none;color:var(--white);text-align:left;padding:20px 24px;font-size:0.95rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;}
+.faq-a{padding:0 24px 20px;color:var(--text-muted);font-size:0.88rem;display:none;}
+.faq-item.open .faq-a{display:block;}
+.cta-section{background:linear-gradient(135deg,#0d2444 0%,#071a33 100%);text-align:center;padding:80px 24px;}
+footer{background:#071a33;border-top:1px solid rgba(201,168,76,0.1);padding:40px 24px;text-align:center;}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:4px;}
+.footer-logo span{color:var(--gold);}
+.footer-copy{color:rgba(255,255,255,0.25);font-size:0.75rem;margin-top:16px;}
+</style>
+</head>
+<body>
+<nav><div class="logo">Clinical<span>Sutra</span></div><a href="#pricing" class="nav-btn">Get the Atlas — ₹299</a></nav>
+<section class="hero">
+<div>
+<div class="badge">NEW RELEASE — MBBS AND GP EDITION 2026</div>
+<h1>The Dermatology<br><em>Atlas Every Indian</em><br>MBBS and GP Needs</h1>
+<p class="hero-sub">45+ skin conditions. Real OPD protocols. Zero textbook fluff. Built for the MBBS doctor and Indian GP who manages skin cases without a dermatologist nearby.</p>
+<div class="stats">
+<div class="stat"><div class="stat-num">45+</div><div class="stat-label">CONDITIONS</div></div>
+<div class="stat-divider"></div>
+<div class="stat"><div class="stat-num">9</div><div class="stat-label">MODULES</div></div>
+<div class="stat-divider"></div>
+<div class="stat"><div class="stat-num">₹299</div><div class="stat-label">ONE-TIME</div></div>
+</div>
+<div class="hero-btns">
+<a href="#pricing" class="btn-primary">📥 Download Now — ₹299</a>
+<a href="#contents" class="btn-secondary">See what's inside ↓</a>
+</div>
+</div>
+</section>
+<div class="trust-bar">
+<span class="trust-item">INSTANT PDF DELIVERY</span>
+<span class="trust-item">7-DAY MONEY BACK GUARANTEE</span>
+<span class="trust-item">WRITTEN BY PRACTICING MBBS AND GP</span>
+<span class="trust-item">7+ YEARS CLINICAL EXPERIENCE</span>
+</div>
+<section><div class="container">
+<div class="section-label">THE PROBLEM</div>
+<h2>Every Indian MBBS and GP Faces This in Dermatology OPD</h2>
+<p class="section-sub">The gap between medical school dermatology and real OPD practice is enormous — and no one fills it.</p>
+<div class="card"><h3>⏱️ No time to think</h3><p>40 patients waiting. Skin case arrives. You have 3 minutes. No dermatologist nearby. What do you do?</p></div>
+<div class="card"><h3>🧫 Misdiagnosed fungal infections</h3><p>India has a silent epidemic of steroid-modified tinea. Most MBBS and GPs are unknowingly prescribing the drugs that cause it.</p></div>
+<div class="card"><h3>💊 Wrong steroid selection</h3><p>Potent steroids on the face. Mild steroids on thick palmar plaques. The steroid ladder is unclear from textbooks.</p></div>
+<div class="card"><h3>📚 Textbooks don't help in OPD</h3><p>Dermatology textbooks are written for dermatologists. Nothing is designed for 3-minute MBBS and GP consultation reality.</p></div>
+</div></section>
+<section style="background:rgba(255,255,255,0.02)"><div class="container">
+<div class="section-label">THE SOLUTION</div>
+<h2>ClinicalSutra Built the Answer for MBBS and GPs</h2>
+<p class="section-sub">A clinical reference built around real Indian OPD practice — not textbooks, not theory. Designed for MBBS doctors and GPs.</p>
+<div class="grid2">
+<div class="sol-card"><div class="card-num">01</div><div style="font-size:1.8rem">🎯</div><h3>5-Step Framework</h3><p>One framework for any skin case in 60 seconds. Morphology → Distribution → Onset → Symptoms → Systemic clues.</p></div>
+<div class="sol-card"><div class="card-num">02</div><div style="font-size:1.8rem">📋</div><h3>MBBS and GP Treatment Protocols</h3><p>Not "refer to dermatologist for everything." Real protocols you can execute at your OPD today.</p></div>
+<div class="sol-card"><div class="card-num">03</div><div style="font-size:1.8rem">🚨</div><h3>Emergency Alerts</h3><p>SJS, erythroderma, necrotising fasciitis — recognise immediately. Know when to act, when to refer.</p></div>
+<div class="sol-card"><div class="card-num">04</div><div style="font-size:1.8rem">💉</div><h3>Prescribing Cheat Sheet</h3><p>18 topical + 14 systemic drugs with doses, indications, and safety notes. One page. Use it every day.</p></div>
+<div class="sol-card"><div class="card-num">05</div><div style="font-size:1.8rem">🗓</div><h3>30-Day Mastery Plan</h3><p>Structured week-by-week learning. 30 minutes per day is enough.</p></div>
+<div class="sol-card"><div class="card-num">06</div><div style="font-size:1.8rem">🇮🇳</div><h3>India-Specific Context</h3><p>Covers India's tinea epidemic, affordable drug choices, PHC-level investigations, Indian skin types.</p></div>
+</div>
+</div></section>
+<section id="contents"><div class="container">
+<div class="section-label">CONTENT</div>
+<h2>What's Inside the Atlas</h2>
+<p class="section-sub">9 modules. 45+ conditions. Structured for rapid recall at point of care.</p>
+<div class="module-item"><div class="check">✓</div><div><h3>Fungal Infections — India's #1 Problem</h3><p>All tinea types, candidiasis, pityriasis versicolor. KOH mount technique. Why to never use Panderm.</p></div></div>
+<div class="module-item"><div class="check">✓</div><div><h3>Bacterial Infections</h3><p>Impetigo to necrotising fasciitis. Antibiotic selection guide. Red flags for admission.</p></div></div>
+<div class="module-item"><div class="check">✓</div><div><h3>Viral Skin Diseases</h3><p>Herpes zoster, HSV, chickenpox, molluscum, warts. Start Acyclovir within 72 hours.</p></div></div>
+<div class="module-item"><div class="check">✓</div><div><h3>Eczema Spectrum</h3><p>Atopic, contact, seborrhoeic, discoid, hand eczema. Topical steroid potency ladder explained.</p></div></div>
+<div class="module-item"><div class="check">✓</div><div><h3>Psoriasis Recognition and Management</h3><p>Auspitz sign, Koebner phenomenon, nail changes. MBBS and GP-level treatment. When to refer.</p></div></div>
+<div class="module-item"><div class="check">✓</div><div><h3>Acne Vulgaris — Grade 1 to 4</h3><p>Stepwise treatment. Adapalene, Clindamycin, Doxycycline, Isotretinoin criteria. Counselling guide.</p></div></div>
+<div class="module-item"><div class="check">✓</div><div><h3>Pigmentary Disorders</h3><p>Vitiligo, melasma, PIH, pityriasis versicolor. Sunscreen importance. Triple cream protocol.</p></div></div>
+<div class="module-item"><div class="check">✓</div><div><h3>Urticaria and Angioedema</h3><p>Acute vs chronic. Step-up antihistamine protocol. Anaphylaxis emergency management.</p></div></div>
+<div class="module-item"><div class="check">✓</div><div><h3>Scabies and Drug Reactions</h3><p>Permethrin protocol, household contact rule. FDE to SJS/TEN recognition.</p></div></div>
+<div class="module-item"><div class="check">✓</div><div><h3>Hair and Nail Disorders</h3><p>Alopecia types with treatment. 14 nail diagnostic signs and their systemic associations.</p></div></div>
+<div class="module-item"><div class="check">✓</div><div><h3>OPD Investigations</h3><p>KOH mount, Wood's lamp, Tzanck smear — how to do and interpret at bedside.</p></div></div>
+<div class="module-item"><div class="check">✓</div><div><h3>Melanoma ABCDE Screening</h3><p>Screen every pigmented lesion confidently. Know which ones need urgent biopsy referral.</p></div></div>
+</div></section>
+<section style="background:rgba(255,255,255,0.02);text-align:center"><div class="container">
+<div class="section-label">WHO IT'S FOR</div>
+<h2>Built for Every Practising MBBS and Indian Clinician</h2>
+<div class="grid2" style="margin-top:40px">
+<div class="card" style="text-align:center"><div style="font-size:2.5rem;margin-bottom:12px">🩺</div><h3>MBBS and GP Doctors</h3><p>Managing skin cases daily in urban, semi-urban, or rural OPD without specialist backup.</p></div>
+<div class="card" style="text-align:center"><div style="font-size:2.5rem;margin-bottom:12px">🏥</div><h3>Rural Medical Officers</h3><p>PHC/CHC settings where dermatology referral takes weeks. You need answers now.</p></div>
+</div>
+</div></section>
+<section><div class="container">
+<div class="section-label">EARLY READERS SAY</div>
+<h2>What Doctors Are Saying About the Atlas</h2>
+<div style="margin-top:40px">
+<div class="testimonial"><p>"The topical steroid ladder alone is worth the ₹299. I've been prescribing Betnovate on everything for years. Now I actually know what I'm doing."</p><div class="stars">★★★★★</div><div class="author">Dr. R. Sharma</div><div class="author-role">MBBS and GP — Rajasthan</div></div>
+<div class="testimonial"><p>"The 5-step framework changed how I approach every skin case. I used to Google everything. Now I diagnose confidently before even opening my phone."</p><div class="stars">★★★★★</div><div class="author">Dr. A. Patel</div><div class="author-role">MBBS and GP, Private Clinic — Gujarat</div></div>
+<div class="testimonial"><p>"Comprehensive and concise. I keep it open on my phone during OPD. The scabies section alone helped me identify an entire family with it in one visit."</p><div class="stars">★★★★★</div><div class="author">Dr. M. Hussain</div><div class="author-role">RMO, Rural Health Centre — UP</div></div>
+</div>
+</div></section>
+<section id="pricing" style="text-align:center"><div class="container">
+<div class="section-label">PRICING</div>
+<h2>One Course. One Price.<br><span style="color:var(--gold)">No Subscriptions Ever.</span></h2>
+<div class="pricing-card">
+<div class="popular-badge">★ MOST POPULAR ★</div>
+<div style="font-size:0.72rem;letter-spacing:0.12em;color:var(--gold);margin-bottom:8px">DERMATOLOGY MASTER ATLAS</div>
+<div style="font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:8px">Complete MBBS and GP Edition</div>
+<div class="price-amount">₹299</div>
+<div class="price-original">Regular price ₹799</div>
+<ul class="feature-list">
+<li>Instant PDF download — no waiting</li>
+<li>Works on phone, tablet, laptop</li>
+<li>Print-ready — keep it at your desk</li>
+<li>45+ conditions with clinical features</li>
+<li>Full prescribing cheat sheet</li>
+<li>Emergency recognition guide</li>
+<li>30-day mastery plan included</li>
+<li>Lifetime access — no expiry</li>
+</ul>
+<a href="https://www.instamojo.com/" class="btn-buy">📥 Download Now for ₹299 →</a>
+<div class="payment-note">🔒 Secure payment via Instamojo • UPI / Cards / Net Banking</div>
+</div>
+</div></section>
+<section><div class="container">
+<div class="section-label">FAQ</div>
+<h2>Common Questions</h2>
+<div style="margin-top:40px">
+<div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How is this different from a standard dermatology textbook? <span style="color:var(--gold)">▾</span></button><div class="faq-a">ClinicalSutra is built for the 3-minute MBBS and GP OPD reality — quick frameworks, actionable protocols, India-specific drug choices you can use the same day.</div></div>
+<div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is the payment secure? <span style="color:var(--gold)">▾</span></button><div class="faq-a">Yes. Payment is processed via Instamojo — a trusted Indian payment platform. Your card details are never stored by us.</div></div>
+<div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I receive the PDF after purchase? <span style="color:var(--gold)">▾</span></button><div class="faq-a">Instantly. After payment, you'll receive a download link on your email. Works on any device.</div></div>
+<div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What if I want a refund? <span style="color:var(--gold)">▾</span></button><div class="faq-a">Email us within 7 days with your order ID and we will refund 100% — no questions asked.</div></div>
+</div>
+</div></section>
+<div class="cta-section">
+<h2>Your Next Skin Case<br><span style="color:var(--gold)">Deserves a Confident Answer</span></h2>
+<p style="color:var(--text-muted);margin:16px 0 32px">Join MBBS doctors and GPs who now handle dermatology OPD with clarity. One PDF. ₹299. Instant download.</p>
+<a href="#pricing" class="btn-primary">📥 Download the Atlas Now — ₹299</a>
+<div style="margin-top:16px;font-size:0.78rem;color:var(--text-muted)">7-day money back guarantee • Instant delivery • No subscription</div>
+</div>
+<footer>
+<div class="footer-logo">Clinical<span>Sutra</span></div>
+<div style="color:var(--text-muted);font-size:0.7rem;letter-spacing:0.1em;margin-bottom:16px">THE CLINICAL FORMULA</div>
+<div class="footer-copy">© 2026 ClinicalSutra. All rights reserved.<br>For educational use only. Not a substitute for clinical judgment.</div>
+</footer>
+<script>
+</script>
+</body>
+</html>
